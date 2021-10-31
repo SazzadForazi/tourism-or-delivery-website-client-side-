@@ -1,0 +1,18 @@
+.items {
+    list-style: none;
+    margin-right: 30px;
+    font-size: 22px;
+    font-weight: 500;
+    color: rgb(14, 13, 13);
+    cursor: pointer;
+    padding: 5px;
+    text-decoration: none;
+    /* margin-bottom: 10px; */
+  }
+  .items:hover {
+    color: rgb(62, 10, 248);
+  }
+  .MenuBar-container{
+      /* background-color: rgb(95, 102, 107); */
+      /* margin-bottom: -100px; */
+  }
