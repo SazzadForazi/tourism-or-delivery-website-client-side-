@@ -15,6 +15,9 @@ const useFirebase = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 setUsers(result.user);
+                sessionStorage.setItem('email', result?.user?.email);
+                console.log(result?.user?.email)
+
 
 
             })

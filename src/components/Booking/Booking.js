@@ -1,17 +1,53 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useForm } from "react-hook-form";
 import { useParams } from 'react-router';
+const Booking = () => {
+    const { serviceId } = useParams();
+    const [product, setProduct] = useState({});
+    const email = sessionStorage.getItem("email");
+    console.log(email);
+    // console.log(serviceId);
 
-const Booking = (service) => {
-    const { serviceId } = useParams()
-    const { place, img, budget } = service;
+    useEffect(() => {
+        fetch(`http://localhost:5000/singleProduct/${serviceId}`)
+            .then(res => res.json())
+            .then(data => setProduct(data))
+    }, [])
+
+    const { register, handleSubmit, reset, } = useForm();
+    const onSubmit = data => {
+        data.email = email;
+        data.status = "pending";
+        console.log(data);
+        // axios.post('http://localhost:5000/confirmOrder', data)
+        //     .then(res => {
+        //         if (res.data.insertedId) {
+        //             alert('added successfully')
+        //             reset();
+        //         }
+        //     })
+        fetch("http://localhost:5000/confirmOrder", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(data),
+        })
+            .then((res) => res.json())
+            .then((result) => console.log(result));
+        console.log(data);
+
+
+    }
     return (
-        <div>
-            <h2>Your booking ID: {serviceId}</h2>
-            <img src={img} alt="" />
-            <h3>Budget:{budget}</h3>
-            <h3>{place}</h3>
-
-            <p>GeoBlue provides peace of mind to world travelers and expats living a global lifestyle by providing access to an elite network of providers, innovative mobile and online tools, the convenience of telemedicine tools and exceptional customer service. We are proud to set the standard for complete, reliable, convenient protection of your health and safety in the global community.</p>
+        <div className='add-service'>
+            <h2>Booking List</h2>
+            <img style={{ width: "400px" }} src={product.img} alt="" /><br /><br />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <input {...register("place", { required: true, maxLength: 20 })} defaultValue={product?.place} />
+                <textarea {...register("des")} defaultValue={product?.des} />
+                <input type="number" {...register("budget")} defaultValue={product?.budget} />
+                <input type="submit" value="Confirm Order" />
+            </form>
         </div>
     );
 };

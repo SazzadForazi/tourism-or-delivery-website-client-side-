@@ -10,7 +10,9 @@ const Nav = () => {
                 <div className="row">
                     <div className="col">
                         <div className="menu-container ">
+
                             <ul className="d-flex align-items-end justify-content-end">
+
                                 <Link to="/home" className="items">
                                     <li>Home</li>
                                 </Link>
@@ -21,21 +23,29 @@ const Nav = () => {
                                 <Link to="/addservice" className="items">
                                     <li>Add Service</li>
                                 </Link>
+                                <Link to="/myOrders" className="items">
+                                    <li>My Orders</li>
+                                </Link>
                                 <Link to="/contact" className="items">
                                     <li>ContactUs</li>
                                 </Link>
-                                {user?.email ?
-                                    <Link to='/login'>
-                                        <button onClick={logOut} className='btn btn-warning me-2'>Log Out</button>
-                                    </Link>
+                                <div className="d-flex justify-content-end">
 
-                                    :
-                                    <Link to='/login'>
-                                        <button className='btn btn-warning me-2'>Log In</button>
-                                    </Link>
-                                }
-                                <div>
-                                    <h5>{user?.displayName}</h5>
+                                    {user?.email ?
+                                        <Link to='/login'>
+                                            <button onClick={logOut} className='btn btn-warning me-2'>Log Out</button>
+                                        </Link>
+
+                                        :
+                                        <Link to='/login'>
+                                            <button className='btn btn-warning me-2'>Log In</button>
+                                        </Link>
+                                    }
+                                    <div>
+                                        <h5>{user?.displayName}</h5>
+                                    </div>
+
+
                                 </div>
 
                             </ul>

@@ -9,7 +9,7 @@ const Home = () => {
     const [datas, setDatas] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://grisly-cat-19256.herokuapp.com/services')
             .then(res => res.json())
             .then(data => setDatas(data))
     }, [])

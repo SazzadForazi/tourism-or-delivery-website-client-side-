@@ -20,6 +20,7 @@ import PrivateRoute from './components/hooks/PrivateRoute/PrivateRoute';
 import Service from './components/Home/Service/Service';
 import Booking from './components/Booking/Booking';
 import Home from './components/Home/Home/Home';
+import MyOrder from './components/Booking/MyOrder';
 
 
 function App() {
@@ -41,15 +42,18 @@ function App() {
             <Route path='/contact'>
               <Contract></Contract>
             </Route>
-            <PrivateRoute path="/booking/:serviceId">
+            <Route path="/booking/:serviceId">
               <Booking></Booking>
-            </PrivateRoute>
+            </Route>
             <Route path='/login'>
               <Login></Login>
             </Route>
-            <Route path='/services'>
-              <Service></Service>
+            <Route exact path="/myOrders">
+              <MyOrder></MyOrder>
             </Route>
+            <PrivateRoute path='/services'>
+              <Service></Service>
+            </PrivateRoute>
             <Route path='/addservice'>
               <Services></Services>
             </Route>
